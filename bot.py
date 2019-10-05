@@ -99,7 +99,7 @@ async def on_message(message):
                         "garftrivia - sends a random fact about Garfield", 
                         "odiekick - sends a gif of Garfield kicking Odie",
                         "garflinks - important garfield links",
-                        "garfcomic [year] [month] [day] - sends a garfield comic from a specific day
+                        "garfcomic [year] [month] [day] - sends a garfield comic from a specific day"
                    
                        ]
 
@@ -140,9 +140,9 @@ async def on_message(message):
     
     if message.content[:9] == "garfcomic":
         try:
-            year = int(message.content[10:13])
-            month = int(message.content[15:16])
-            day = int(message.content[18:19])
+            year = int(message.content[10:14])
+            month = int(message.content[15:17])
+            day = int(message.content[18:20])
         except:
             await message.channel.send("You may have entered the date wrong. An example will be shown:\n``garfcomic 2005 05 12``")
         else:
