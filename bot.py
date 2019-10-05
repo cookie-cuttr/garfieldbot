@@ -138,7 +138,7 @@ async def on_message(message):
     if "monday" in message.content.lower():
         await message.channel.send("I **HATE** mondays!")
     
-    if message.content[0:8] == "garfcomic":
+    if message.content[:9] == "garfcomic":
         try:
             year = int(message.content[10:13])
             month = int(message.content[15:16])
