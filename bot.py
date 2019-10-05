@@ -11,6 +11,13 @@ from discord.ext import commands
 
 bot = commands.Bot(command_prefix="!")
 
+def doubleDigit(num):
+    if len(num) == 1:
+        num = "0" + num
+        return num
+    else:
+        return
+
 @bot.event
 async def on_ready():
     print(
@@ -36,12 +43,12 @@ async def on_message(message):
 
     if message.content.lower() == "garfdaily":
         localtime = time.gmtime()
-        if len(str(localtime.tm_mday)) == 1:
-            day = "0" + str(localtime.tm_mday)
-        else:
-            day  = localtime.tm_mday
+        day = str(localtime.tm_mday)
+        month = str(localtime.tm_month)
+        doubleDigit(day)
+        doubleDigit(month)
 
-        garfFileName = "https://d1ejxu6vysztl5.cloudfront.net/comics/garfield/2019/"+str(localtime.tm_year)+"-"+str(localtime.tm_mon)+"-"+day+".gif"
+        garfFileName = "https://d1ejxu6vysztl5.cloudfront.net/comics/garfield/2019/"+str(localtime.tm_year)+"-"+month+"-"+day+".gif"
 
         await message.channel.send(garfFileName)
         print ("A user requested this comic:", garfFileName)
@@ -58,13 +65,11 @@ async def on_message(message):
             daycap = 30
         randomDay = str(random.randint(1,daycap))
         
-        if len(randomDay) == 1:
-            randomDay = "0" + randomDay
+        doubleDigit(randomDay)
             
         randomMonth = str(randomMonth)
 
-        if len(randomMonth) == 1:
-            randomMonth = "0" + randomMonth
+        doubleDigit(randomMonth)
         
         garfFileName = "https://d1ejxu6vysztl5.cloudfront.net/comics/garfield/"+randomYear+"/"+randomYear+"-"+randomMonth+"-"+randomDay+".gif"
         await message.channel.send(garfFileName)
@@ -93,7 +98,9 @@ async def on_message(message):
                         "garfrandom - sends a random Garfield comic", 
                         "garftrivia - sends a random fact about Garfield", 
                         "odiekick - sends a gif of Garfield kicking Odie",
-                        "garflinks - important garfield links"
+                        "garflinks - important garfield links",
+                        "garfcomic [year] [month] [day] - sends a garfield comic from a specific day
+                   
                        ]
 
         helpmessage = "Garfield Bot 1.0 Commands\n```"
@@ -130,7 +137,27 @@ async def on_message(message):
         
     if "monday" in message.content.lower():
         await message.channel.send("I **HATE** mondays!")
-
+    
+    if message.content[0:8] == "garfcomic":
+        try:
+            year = int(message.content[10:13])
+            month = int(message.content[15:16])
+            day = int(message.content[18:19])
+        except:
+            await message.channel.send("You may have entered the date wrong. An example will be shown:\n``garfcomic 2005 05 12``")
+        else:
+            year = str(year)
+            month = str(month)
+            day = str(day)
+            try:
+                doubleDigit(day)
+                doubleDigit(month)
+                url = "https://d1ejxu6vysztl5.cloudfront.net/comics/garfield/"+year+"/"+year+"-"+month+"-"+day+".gif"
+            except:
+                await message.channel.send("There is possibly no garfield comic from this date")
+            else:
+                await message.channel.send(url)
+        
 
 
 bot.run(TOKEN)
