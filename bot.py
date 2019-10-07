@@ -126,14 +126,27 @@ async def on_message(message):
                 
         elif message.content[4:9].lower() == "comic":
                 try:
-                        year = message.content[10:14]
-                        month = message.content[15:17]
-                        day = message.content[18:20]
+                        year = str(int(message.content[10:14]))
+                        month = str(int(message.content[15:17]))
+                        day = str(int(message.content[18:20]))
                 except:
                         await message.channel.send("Please enter the date as either `garfcomic YYYY MM DD` or `garfcomic YYYY/MM/DD`")
                 else:
                         url = "https://d1ejxu6vysztl5.cloudfront.net/comics/garfield/"+year+"/"+year+"-"+month+"-"+day+".gif"
                         await message.channel.send(url)
+         
+        elif message.content[4:8].lower() == "crop":
+                try:
+                        year = str(int(message.content[10:14]))
+                        month = str(int(message.content[15:17]))
+                        day = str(int(message.content[18:20]))
+                except:
+                        await message.channel.send("Please enter the date as either `garfcomic YYYY MM DD` or `garfcomic YYYY/MM/DD`")
+                else:
+                        url = "https://d1ejxu6vysztl5.cloudfront.net/comics/garfield/"+year+"/"+year+"-"+month+"-"+day+".gif"
+                        
+                
+                
 
     if "lasagna" in message.content.lower() or "lasagne" in message.content.lower():
         response = "did somebody say lasagna?"
