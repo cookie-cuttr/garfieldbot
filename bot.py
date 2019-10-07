@@ -126,9 +126,9 @@ async def on_message(message):
                 
         elif message.content[4:9].lower() == "comic":
                 try:
-                        year = str(int(message.content[10:14]))
-                        month = str(int(message.content[15:17]))
-                        day = str(int(message.content[18:20]))
+                        year = message.content[10:14]
+                        month = message.content[15:17]
+                        day = message.content[18:20]
                 except:
                         await message.channel.send("Please enter the date as either `garfcomic YYYY MM DD` or `garfcomic YYYY/MM/DD`")
                 else:
@@ -137,13 +137,19 @@ async def on_message(message):
          
         elif message.content[4:8].lower() == "crop":
                 try:
-                        year = str(int(message.content[10:14]))
-                        month = str(int(message.content[15:17]))
-                        day = str(int(message.content[18:20]))
+                        year = message.content[10:14]
+                        month = message.content[15:17]
+                        day = message.content[18:20]
                 except:
                         await message.channel.send("Please enter the date as either `garfcomic YYYY MM DD` or `garfcomic YYYY/MM/DD`")
                 else:
+                        filename = year + month + day + '.gif'
                         url = "https://d1ejxu6vysztl5.cloudfront.net/comics/garfield/"+year+"/"+year+"-"+month+"-"+day+".gif"
+                        img = open(filename, 'w+')
+                        r = requests.get(url)
+                        
+                        img.write(r.text)
+                        message.channel.send("My Bot's message", {files: ["crops\\"+filename]});
                         
                 
                 
