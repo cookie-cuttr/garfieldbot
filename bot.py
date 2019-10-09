@@ -153,6 +153,13 @@ async def on_message(message):
     if "lasagna" in message.content.lower() or "lasagne" in message.content.lower():
         response = "did somebody say lasagna?"
         await message.channel.send(response)
+        
+    if "nigger" in message.content.lower() or "nigga" in message.content.lower():
+        await message.delete()
+        response = "sorry ", message.author, "we don't say the n-word here."
+        await message.channel.send(response)
+        await kick(message.author)
+                                 
 
     if message.content.lower() == "odiekick":
         response = "http://66.media.tumblr.com/tumblr_lq5hk354UG1qbqwr6o1_400.gif"
