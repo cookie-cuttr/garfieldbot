@@ -43,5 +43,6 @@ async def on_message(message):
     elif msg[1] == "comic":
         await chn.send("This feature isn't working yet, sorry for the inconvenience.")
     
-        
+token = ""
+bot.run(token)
         
