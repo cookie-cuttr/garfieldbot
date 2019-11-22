@@ -2,4 +2,15 @@
 	{"trivia": "Garfield is an orange cat"},
 	{"trivia": "Garfield was first published on June 19th 1978"},
 	{"trivia": "This bot was created by me"}
-	]}
+	],
+"help": [
+	{"command": "suup"},
+	{"command": "duude"}
+	],
+"links": [
+	{"title": "Official Garfield Website",
+	"link": "https://garfield.com/"},
+	{"title": "GarfBot's GitHub Source Code",
+	"link": "https://github.com/cookie-cuttr/garfieldbot"}
+	]
+}
