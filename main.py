@@ -30,17 +30,36 @@ async def on_message(message):
             year = str(localtime.tm_year)
             curl = "https://d1ejxu6vysztl5.cloudfront.net/comics/garfield/2019/{}-{}-{}.gif".format(year,month,day)
             await chn.send(curl)
+
+            print(("Sent today's comic to {}, {}").format(chn, message.guild))
             
         elif msg[1] == "trivia":
             with open('lst.json') as file:
                 data = json.load(file)
                 ran = random.choice(data['trivia'])['trivia']
                 await chn.send(ran)
+
+            print(("Sent trivia to {}, {}").format(chn, message.guild))
             
         elif msg[1] == "help":
-            await chn.send("This feature isn't working yet, sorry for the inconvenience.")
+            output = ""
+            with open('lst.json') as file:
+                data = json.load(file)
+                for x in data['help']:
+                    output += x['command']
+                    output += "\n"
+                await chn.send(output)
         elif msg[1] == "links":
-            await chn.send("This feature isn't working yet, sorry for the inconvenience.")
+            output = "```"
+            with open('lst.json') as file:
+                data = json.load(file)
+                for x in data['links']:
+                    output += x['title']
+                    output += ": "
+                    output += x['link']
+                    output += "\n"
+            output += "```"
+            await chn.send(output)
         elif msg[1] == "prompt":
             await chn.send("This feature isn't working yet, sorry for the inconvenience.")
         elif msg[1] == "comic":
